@@ -37,6 +37,9 @@ RUN cd $CATALINA_HOME && \
     -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
     conf/server.xml
 
+# Offline redirection
+COPY index.jsp webapps/draw/index.jsp
+RUN sed -i '/<welcome-file>index.html<\/welcome-file>/i \ \ \ \ <welcome-file>index.jsp<\/welcome-file>' webapps/draw/WEB-INF/web.xml
 
 # Copy docker-entrypoint
 COPY docker-entrypoint.sh /
