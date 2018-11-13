@@ -41,6 +41,10 @@ RUN cd $CATALINA_HOME && \
 COPY index.jsp webapps/draw/index.jsp
 RUN sed -i '/<welcome-file>index.html<\/welcome-file>/i \ \ \ \ <welcome-file>index.jsp<\/welcome-file>' webapps/draw/WEB-INF/web.xml
 
+# Remove external URLs (just precaution)
+COPY custom_urls.js
+RUN sed -i "/App.main();/i mxscript('custom_urls.js');" webapps/draw/index.html
+
 # Copy docker-entrypoint
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
