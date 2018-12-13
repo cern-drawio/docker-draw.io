@@ -1,4 +1,4 @@
-FROM tomcat:9-jre8-slim
+FROM tomcat:9-jre11-slim
 
 LABEL maintainer="Florian JUDITH <florian.judith.b@gmail.com>"
 
@@ -6,7 +6,7 @@ ENV VERSION=9.3.1
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-        openjdk-8-jdk-headless ant git patch wget xmlstarlet certbot && \
+        openjdk-11-jdk-headless ant git patch wget xmlstarlet certbot && \
     cd /tmp && \
     wget https://github.com/jgraph/draw.io/archive/v${VERSION}.zip && \
     unzip v${VERSION}.zip && \
@@ -15,7 +15,7 @@ RUN apt-get update -y && \
     ant war && \
     cd /tmp/drawio-${VERSION}/build && \
     unzip /tmp/drawio-${VERSION}/build/draw.war -d $CATALINA_HOME/webapps/draw && \
-    apt-get remove -y --purge openjdk-8-jdk-headless ant git patch wget && \
+    apt-get remove -y --purge openjdk-11-jdk-headless ant git patch wget && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
