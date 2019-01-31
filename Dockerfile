@@ -2,13 +2,13 @@ FROM tomcat:9-jre11-slim
 
 LABEL maintainer="Florian JUDITH <florian.judith.b@gmail.com>"
 
-ENV VERSION=9.3.1
+ENV VERSION=10.1.2
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
         openjdk-11-jdk-headless ant git patch wget xmlstarlet certbot && \
     cd /tmp && \
-    wget https://github.com/jgraph/draw.io/archive/v${VERSION}.zip && \
+    wget https://github.com/cern-drawio/drawio/archive/v${VERSION}.zip && \
     unzip v${VERSION}.zip && \
     cd /tmp/drawio-${VERSION} && \
     cd /tmp/drawio-${VERSION}/etc/build && \
