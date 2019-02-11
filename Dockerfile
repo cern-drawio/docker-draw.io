@@ -2,7 +2,7 @@ FROM tomcat:9-jre11-slim
 
 LABEL maintainer="Florian JUDITH <florian.judith.b@gmail.com>"
 
-ENV VERSION=10.1.2
+ENV VERSION=10.1.9
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
