@@ -9,7 +9,7 @@ RUN apt-get update -y && \
         openjdk-11-jdk-headless ant git patch wget xmlstarlet certbot && \
     cd /tmp && \
     wget https://github.com/cern-drawio/drawio/archive/cern-v${VERSION}.zip && \
-    unzip v${VERSION}.zip && \
+    unzip cern-v${VERSION}.zip && \
     cd /tmp/drawio-${VERSION} && \
     cd /tmp/drawio-${VERSION}/etc/build && \
     ant war && \
