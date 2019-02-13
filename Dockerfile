@@ -2,7 +2,7 @@ FROM tomcat:9-jre11-slim
 
 LABEL maintainer="Florian JUDITH <florian.judith.b@gmail.com>"
 
-ENV VERSION=10.1.9
+ENV VERSION=10.2.1
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -20,7 +20,7 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* && \
     rm -rf \
-        /tmp/v${VERSION}.zip \
+        /tmp/cern-v${VERSION}.zip \
         /tmp/drawio-${VERSION}
 
 # Update server.xml to set Draw.io webapp to root
