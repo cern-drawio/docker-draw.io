@@ -1,8 +1,8 @@
 FROM tomcat:9-jre11-slim
 
-LABEL maintainer="Florian JUDITH <florian.judith.b@gmail.com>"
+LABEL maintainer="Esteban Puentes <esteban.puentes@cern.ch>"
 
-ENV VERSION=10.2.1
+ENV VERSION=10.6.5
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -37,10 +37,6 @@ RUN cd $CATALINA_HOME && \
     -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
     conf/server.xml
 
-# Offline redirection
-COPY index.jsp webapps/draw/index.jsp
-RUN sed -i '/<welcome-file>index.html<\/welcome-file>/i \ \ \ \ <welcome-file>index.jsp<\/welcome-file>' webapps/draw/WEB-INF/web.xml
-
 # Remove external URLs (just precaution)
 COPY custom_urls.js webapps/draw/custom_urls.js
 RUN sed -i "/App.main();/i mxscript('custom_urls.js');" webapps/draw/index.html
@@ -51,7 +47,7 @@ RUN chmod +x /docker-entrypoint.sh
 
 WORKDIR $CATALINA_HOME
 
-EXPOSE 8080 8443
+EXPOSE 8080
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["catalina.sh", "run"]
